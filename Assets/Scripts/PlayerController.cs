@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(CharacterController))]
+//[RequireComponent(typeof(CharacterController))]
 public class PlayerController : MonoBehaviour
 {
     [ReadOnly] public float horizontal;
     [ReadOnly] public float vertical;
 
     [ReadOnly] public bool wasGrounded = false;
+    private bool wasUp = false;
 
     public float gravity = 0.5f;
     public float horizontalDamp = 0.95f;
@@ -17,6 +18,7 @@ public class PlayerController : MonoBehaviour
     public float jumpScale = 0.25f;
     public float horizontalSpeed = 0.8f;
 
+    public Vector3 rbVelocity;
 
     private Rigidbody rb;
     private CharacterController cc;
@@ -25,17 +27,26 @@ public class PlayerController : MonoBehaviour
     // Use this for initialization
     void Start ()
     {
+        collider = GetComponent<SphereCollider>();
         rb = GetComponent<Rigidbody>();
-        cc = GetComponent<CharacterController>();
+        //cc = GetComponent<CharacterController>();
     }
     
     // Update is called once per frame
     void Update ()
     {
+        //Update Horizontal
+        horizontal = rb.velocity.x/80;
+        vertical = rb.velocity.y/80;
+
+        rbVelocity = rb.velocity;
+
         //Grounded value
-        bool isGrounded = Physics.CheckSphere(transform.position - Vector3.up*0.1f, cc.radius, LayerMask.GetMask("Default"));
-        bool isRight = Physics.CheckSphere(transform.position - Vector3.left*0.1f, cc.radius, LayerMask.GetMask("Default"));
-        bool isLeft = Physics.CheckSphere(transform.position - Vector3.right*0.1f, cc.radius, LayerMask.GetMask("Default"));
+        bool isGrounded = Physics.CheckSphere(transform.position - Vector3.up*0.1f, collider.radius* 0.98f, LayerMask.GetMask("Default"));
+        bool isRight = Physics.CheckSphere(transform.position - Vector3.left*0.1f, collider.radius * 0.97f, LayerMask.GetMask("Default"));
+        bool isLeft = Physics.CheckSphere(transform.position - Vector3.right*0.1f, collider.radius * 0.97f, LayerMask.GetMask("Default"));
+        bool isUp = Physics.CheckSphere(transform.position - Vector3.down*0.1f, collider.radius*0.97f,
+            LayerMask.GetMask("Default"));
 
         //Inputs
         bool movement = Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.A);
@@ -46,12 +57,18 @@ public class PlayerController : MonoBehaviour
         else horizontal *= horizontalDamp;
 
         //Vertical Checks
-        if (!isGrounded) vertical += -gravity*Time.deltaTime;
+        vertical += -gravity*Time.deltaTime;
+
+        //if (isGrounded) vertical = -0.1f;
         
-        if (isGrounded && !wasGrounded)
-        {
-            vertical = 0;
-        }
+        //if (isGrounded && !wasGrounded)
+        //{
+        //    vertical = -0.1f;
+        //}
+        //if (isUp && !wasUp)
+        //{
+        //    vertical = 0;
+        //}
 
         //Horizontal Movement
         if (Input.GetKey(KeyCode.D)) horizontal += (!isGrounded ? horizontalSpeed : horizontalSpeed /groundedHorizontalDamp * horizontalDamp) * Time.deltaTime;
@@ -61,14 +78,15 @@ public class PlayerController : MonoBehaviour
         if ((Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.Space)) && isGrounded) vertical = jumpScale;
         
         //Horizontal Checks
-        if (isRight) horizontal = Mathf.Clamp(horizontal, -999, 0);
-        if (isLeft) horizontal = Mathf.Clamp(horizontal, 0, 999);
+        //if (isRight) horizontal = Mathf.Clamp(horizontal, -999, 0.1f);
+        //if (isLeft) horizontal = Mathf.Clamp(horizontal, -0.1f, 999);
 
         vertical = Mathf.Clamp(vertical, -20, 999);
 
-        cc.Move((horizontal*Vector3.right + vertical*Vector3.up));
+        rb.velocity = ((horizontal*Vector3.right + vertical*Vector3.up)*80);
 
         wasGrounded = isGrounded;
+        wasUp = isUp;
 
         return;
 
@@ -89,11 +107,13 @@ public class PlayerController : MonoBehaviour
     {
         if (!Application.isPlaying) return;
 
-        Gizmos.color = Color.white;
-        Gizmos.DrawSphere(transform.position - Vector3.up * 0.1f, cc.radius);
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawSphere(transform.position - Vector3.up * 0.1f, collider.radius*0.9f);
         Gizmos.color = Color.red;
-        Gizmos.DrawSphere(transform.position - Vector3.right * 0.1f, cc.radius);
+        Gizmos.DrawSphere(transform.position - Vector3.right * 0.1f, collider.radius * 0.9f);
+        Gizmos.color = Color.blue;
+        Gizmos.DrawSphere(transform.position - Vector3.down * 0.1f, collider.radius*0.9f);
         Gizmos.color = Color.green;
-        Gizmos.DrawSphere(transform.position - Vector3.left * 0.1f, cc.radius);
+        Gizmos.DrawSphere(transform.position - Vector3.left * 0.1f, collider.radius * 0.9f);
     }
 }
