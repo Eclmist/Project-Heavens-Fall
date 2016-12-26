@@ -12,13 +12,14 @@ public class PlayerController : MonoBehaviour
     private bool wasUp = false;
 
     public float gravity = 0.5f;
-    public float horizontalDamp = 0.95f;
-    public float groundedHorizontalDamp = 0.7f;
+    public float horizontalDamp = 0.995f;
+    public float groundedHorizontalDamp = 0.95f;
 
     public float jumpScale = 0.25f;
     public float horizontalSpeed = 0.8f;
 
     public Vector3 rbVelocity;
+    public float maxSpeed = 0.2F;
 
     private Rigidbody rb;
     private CharacterController cc;
@@ -52,7 +53,7 @@ public class PlayerController : MonoBehaviour
         bool movement = Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.A);
 
         //Horizontal Damps
-        if (movement) horizontal = Mathf.Clamp(horizontal,-0.3f, 0.3f);
+        if (movement) horizontal = Mathf.Clamp(horizontal,-maxSpeed, maxSpeed);
         else if (isGrounded) horizontal *= groundedHorizontalDamp;
         else horizontal *= horizontalDamp;
 

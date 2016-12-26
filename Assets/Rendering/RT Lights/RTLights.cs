@@ -50,12 +50,37 @@ public class RTLights : MonoBehaviour
         int rayCount = Mathf.RoundToInt(angle*resolution);
         float stepAngleSize = angle/rayCount;
         List<Vector3> lightPoints = new List<Vector3>();
+        RTInfo oldRTInfo = new RTInfo();
 
         for (int i = 0; i <= rayCount; i++)
         {
-            float currentStepAngle = transform.eulerAngles.y - angle/2 + stepAngleSize*i;
+            float currentStepAngle = transform.eulerAngles.z - angle/2 + stepAngleSize*i;
             RTInfo currentRtInfo = RayTrace(- angle/2 +stepAngleSize * i);
+
+            if (i > 0)
+            {
+                bool edgeThresholdExceeded =
+                    Mathf.Abs(oldRTInfo.distance - currentRtInfo.distance) > distanceBias;
+
+                if (oldRTInfo.hit != currentRtInfo.hit 
+                    || (oldRTInfo.hit && currentRtInfo.hit && edgeThresholdExceeded))
+                {
+                    EdgeInfo edge = FindEdge(oldRTInfo, currentRtInfo);
+
+                    if (edge.pointA != Vector3.zero)
+                    {
+                        lightPoints.Add(edge.pointA);
+                    }
+
+                    if (edge.pointB != Vector3.zero)
+                    {
+                        lightPoints.Add(edge.pointB);
+                    }
+                }
+            }
+
             lightPoints.Add(currentRtInfo.point);
+            oldRTInfo = currentRtInfo;
         }
 
         int vertexCount = lightPoints.Count + 1;
@@ -69,6 +94,8 @@ public class RTLights : MonoBehaviour
 
         for (int i = 0; i < vertexCount - 1; i++)
         {
+            Debug.DrawLine(transform.position, lightPoints[i]);
+
             vertices[i+1] = transform.InverseTransformPoint(lightPoints[i]);
             uv[i + 1] = new Vector2(vertices[i + 1].x / radius, vertices[i + 1].y / radius) + new Vector2(0.5F, 0.5F);
 
@@ -87,10 +114,41 @@ public class RTLights : MonoBehaviour
         lightMesh.RecalculateNormals();
     }
 
+    EdgeInfo FindEdge(RTInfo minRTInfo,RTInfo maxRTInfo)
+    {
+        float minAngle = minRTInfo.angle;
+        float maxAngle = maxRTInfo.angle;
+
+        Vector3 minPoint = Vector3.zero;
+        Vector3 maxPoint = Vector3.zero;
+
+        for (int i = 0; i < edgeResolveResolution; i++)
+        {
+            float angle = (minAngle + maxAngle)/2;
+            RTInfo newRTInfo = RayTrace(angle);
+
+            bool edgeThresholdExceeded =
+                Mathf.Abs(minRTInfo.distance - newRTInfo.distance) > distanceBias;
+
+            if (newRTInfo.hit == minRTInfo.hit && !edgeThresholdExceeded)
+            {
+                minAngle = angle;
+                minPoint = newRTInfo.point;
+            }
+            else
+            {
+                maxAngle = angle;
+                maxPoint = newRTInfo.point;
+            }
+        }
+
+        return new EdgeInfo(minPoint, maxPoint);
+    }
+
     public Vector3 DirFromAngle(float angle, bool global)
     {
         if (!global)
-            angle += transform.eulerAngles.y;
+            angle += transform.eulerAngles.z;
 
         return new Vector3(Mathf.Cos(angle * Mathf.Deg2Rad), Mathf.Sin(angle * Mathf.Deg2Rad), 0);
     }
@@ -121,6 +179,19 @@ public class RTLights : MonoBehaviour
             point = p;
             distance = d;
             angle = a;
+        }
+    }
+
+    public struct EdgeInfo
+    {
+
+        public Vector3 pointA;
+        public Vector3 pointB;
+
+        public EdgeInfo(Vector3 a, Vector3 b)
+        {
+            pointA = a;
+            pointB = b;
         }
     }
 }
