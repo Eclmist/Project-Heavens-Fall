@@ -15,6 +15,7 @@ public class PlayerControllerV2 : MonoBehaviour
 
     public float jumpScale = 0.25f;
     public float horizontalSpeed = 0.8f;
+    public float maxSpeed = 0.2f;
 
     private CharacterController cc;
 
@@ -27,6 +28,9 @@ public class PlayerControllerV2 : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
+        //Clamp Z
+        transform.position = new Vector3(transform.position.x, transform.position.y, 0);
+
         //Update Values
         horizontal = cc.velocity.x / 80;
         vertical = cc.velocity.y / 80;
@@ -40,7 +44,7 @@ public class PlayerControllerV2 : MonoBehaviour
         bool movement = Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.A);
 
         //Horizontal Damps
-        if (movement) horizontal = Mathf.Clamp(horizontal, -0.2f, 0.2f);
+        if (movement) horizontal = Mathf.Clamp(horizontal, -maxSpeed, maxSpeed);
         else if (isGrounded) horizontal *= groundHorizontalDamping;
         else horizontal *= airHorizontalDamping;
 
