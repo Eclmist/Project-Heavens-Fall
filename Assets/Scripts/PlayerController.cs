@@ -8,14 +8,19 @@ public class PlayerController : MonoBehaviour
     [ReadOnly] public float horizontal;
     [ReadOnly] public float vertical;
 
-    public float gravity = 0.7f;
-    public float horizontalDamp = 0.7f;
+    [ReadOnly] public bool wasGrounded = false;
 
-    public float jumpScale = 1;
-    public float horizontalSpeed = 1;
+    public float gravity = 0.5f;
+    public float horizontalDamp = 0.95f;
+    public float groundedHorizontalDamp = 0.7f;
+
+    public float jumpScale = 0.25f;
+    public float horizontalSpeed = 0.8f;
+
 
     private Rigidbody rb;
     private CharacterController cc;
+    private SphereCollider collider;
 
     // Use this for initialization
     void Start ()
@@ -25,20 +30,45 @@ public class PlayerController : MonoBehaviour
     }
     
     // Update is called once per frame
-    void Update () {
+    void Update ()
+    {
+        //Grounded value
+        bool isGrounded = Physics.CheckSphere(transform.position - Vector3.up*0.1f, cc.radius, LayerMask.GetMask("Default"));
+        bool isRight = Physics.CheckSphere(transform.position - Vector3.left*0.1f, cc.radius, LayerMask.GetMask("Default"));
+        bool isLeft = Physics.CheckSphere(transform.position - Vector3.right*0.1f, cc.radius, LayerMask.GetMask("Default"));
 
-        horizontal *= horizontalDamp;
-        vertical += -gravity * Time.deltaTime;
+        //Inputs
+        bool movement = Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.A);
 
-        if (Input.GetKey(KeyCode.D)) horizontal += horizontalSpeed * Time.deltaTime;
-        if (Input.GetKey(KeyCode.A)) horizontal += -horizontalSpeed * Time.deltaTime;
+        //Horizontal Damps
+        if (movement) horizontal = Mathf.Clamp(horizontal,-0.3f, 0.3f);
+        else if (isGrounded) horizontal *= groundedHorizontalDamp;
+        else horizontal *= horizontalDamp;
 
-        if ((Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.Space)) && cc.isGrounded) vertical = jumpScale;
+        //Vertical Checks
+        if (!isGrounded) vertical += -gravity*Time.deltaTime;
+        
+        if (isGrounded && !wasGrounded)
+        {
+            vertical = 0;
+        }
+
+        //Horizontal Movement
+        if (Input.GetKey(KeyCode.D)) horizontal += (!isGrounded ? horizontalSpeed : horizontalSpeed /groundedHorizontalDamp * horizontalDamp) * Time.deltaTime;
+        if (Input.GetKey(KeyCode.A)) horizontal += (!isGrounded ? -horizontalSpeed : -horizontalSpeed/groundedHorizontalDamp * horizontalDamp) * Time.deltaTime;
+        
+        //Vertical Movement
+        if ((Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.Space)) && isGrounded) vertical = jumpScale;
+        
+        //Horizontal Checks
+        if (isRight) horizontal = Mathf.Clamp(horizontal, -999, 0);
+        if (isLeft) horizontal = Mathf.Clamp(horizontal, 0, 999);
 
         vertical = Mathf.Clamp(vertical, -20, 999);
 
         cc.Move((horizontal*Vector3.right + vertical*Vector3.up));
-;
+
+        wasGrounded = isGrounded;
 
         return;
 
@@ -53,5 +83,17 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKey(KeyCode.A)) horizontal += -1*Time.deltaTime;
 
         rb.velocity += (horizontal*Vector3.right + vertical*Vector3.up) * Time.deltaTime;
+    }
+
+    void OnDrawGizmos()
+    {
+        if (!Application.isPlaying) return;
+
+        Gizmos.color = Color.white;
+        Gizmos.DrawSphere(transform.position - Vector3.up * 0.1f, cc.radius);
+        Gizmos.color = Color.red;
+        Gizmos.DrawSphere(transform.position - Vector3.right * 0.1f, cc.radius);
+        Gizmos.color = Color.green;
+        Gizmos.DrawSphere(transform.position - Vector3.left * 0.1f, cc.radius);
     }
 }
