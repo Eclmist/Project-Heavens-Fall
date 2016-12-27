@@ -16,6 +16,8 @@ public class RTLights : MonoBehaviour
 
     public LayerMask includeLayers;
 
+    public bool debug = false;
+
     /* Inherited Properties */
     private Light light;
     [ReadOnly] public float radius;
@@ -34,7 +36,7 @@ public class RTLights : MonoBehaviour
         lightMeshFilter.mesh = lightMesh;
         light = GetComponent<Light>();
     }
-	
+
 	void Update ()
 	{
         radius = light.range;
@@ -94,6 +96,7 @@ public class RTLights : MonoBehaviour
 
         for (int i = 0; i < vertexCount - 1; i++)
         {
+            if (debug)
             Debug.DrawLine(transform.position, lightPoints[i]);
 
             vertices[i+1] = transform.InverseTransformPoint(lightPoints[i]);
