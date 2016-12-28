@@ -65,7 +65,7 @@ public class RTLights : MonoBehaviour
                     Mathf.Abs(oldRTInfo.distance - currentRtInfo.distance) > distanceBias;
 
                 if (oldRTInfo.hit != currentRtInfo.hit 
-                    || (oldRTInfo.hit && currentRtInfo.hit && edgeThresholdExceeded))
+                    || (oldRTInfo.hit && edgeThresholdExceeded))
                 {
                     EdgeInfo edge = FindEdge(oldRTInfo, currentRtInfo);
 
