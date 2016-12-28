@@ -20,7 +20,7 @@ public class RTLights : MonoBehaviour
 
     /* Inherited Properties */
     private Light light;
-    [ReadOnly] public float radius;
+    public float radius;
     /* -------------------- */
 
     private MeshFilter lightMeshFilter;
