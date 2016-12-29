@@ -1066,9 +1066,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5568c2675076b8e46b5417de9d4074f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxJump: 4
-  timeToReachMaxJump: 0.4
-  timeToReachMaxSpeed: 0.15
+  maxJump: 6
+  timeToReachMaxJump: 0.5
+  timeToReachMaxSpeed: 0.2
   maxSpeed: 6
   collidedLayer:
     serializedVersion: 2
