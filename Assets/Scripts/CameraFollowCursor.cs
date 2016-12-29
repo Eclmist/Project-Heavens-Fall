@@ -12,7 +12,6 @@ public class CameraFollowCursor : MonoBehaviour
     Vector2 targetPoint;
 
     float tParam = 2;
-    float scriptStartTime;
 
     void Start()
     {
@@ -20,16 +19,11 @@ public class CameraFollowCursor : MonoBehaviour
         centerPoint = startingPosition;
 
         gameObject.GetComponent<RenderImage>().setBrightness(0);
-        scriptStartTime = Time.time;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Time.time - scriptStartTime < 1)
-        {
-            gameObject.GetComponent<RenderImage>().setBrightness(Mathf.Lerp(0, 0.88F, Time.time - scriptStartTime));
-        }
 
         transform.position = new Vector3(centerPoint.x + (Input.mousePosition.x - centerPoint.x) * 0.001F,
                                           centerPoint.y + (Input.mousePosition.y - centerPoint.y) * 0.001F,

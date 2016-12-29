@@ -1,14 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-
-[ExecuteInEditMode]
 public class RenderImage : MonoBehaviour {
 	#region Variables
 	public Shader curShader;
-	public float brightnessAmount = 1.0f;
-	public float saturationAmount = 1.0f;
-	public float contrastAmount = 1.0f;
+    private float brightnessAmount = 1.0f;
+    private float saturationAmount = 1.0f;
+    private float contrastAmount = 1.0f;
 	private Material curMaterial;
 	#endregion
 	
@@ -27,8 +25,10 @@ public class RenderImage : MonoBehaviour {
 	}
 	#endregion
 	// Use this for initialization
-	void Start () 
+	void Start ()
 	{
+	    brightnessAmount = 0;
+
 		if(!SystemInfo.supportsImageEffects)
 		{
 			enabled = false;

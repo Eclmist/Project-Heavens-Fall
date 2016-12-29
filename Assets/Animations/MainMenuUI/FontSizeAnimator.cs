@@ -54,7 +54,7 @@ public class FontSizeAnimator : MonoBehaviour {
         for (int i = 0; i < difference; i++)
         {
             text.fontSize = (int)Mathf.Lerp(currentSize, size, ((float)i / (float)difference));
-            yield return new WaitForFixedUpdate();
+            yield return null;
         }
 
     }
