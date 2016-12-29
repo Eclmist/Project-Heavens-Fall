@@ -93,16 +93,20 @@ public class PlayerControllerA : MonoBehaviour {
 
         if (vDirection.x > 0)
         {
-            if (transform.localScale.x != 1)
+            Debug.Log("Forward");
+            if (flipObject.transform.localScale.x < 0)
             {
-                flipObject.transform.localScale = new Vector3(-1, 1, 1);
+                Debug.Log("Flip >");
+                flipObject.transform.localScale = new Vector3(1, 1, 1);
             }
         }
         else if (vDirection.x < 0)
         {
-            if (transform.localScale.x != -1)
+            Debug.Log("Backwards");
+            if (flipObject.transform.localScale.x > 0)
             {
-                flipObject.transform.localScale = new Vector3(1, 1, 1);
+                Debug.Log("Flip <");
+                flipObject.transform.localScale = new Vector3(-1, 1, 1);
             }
         }
 
