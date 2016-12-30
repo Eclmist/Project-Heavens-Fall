@@ -4,23 +4,25 @@ using System.Collections;
 public class PlayerControllerA : MonoBehaviour {
 
     //Player
-    public float maxJump = 4;
-    public float timeToReachMaxJump = .4f;
+    public float maxJump = 8;
+    public float timeToReachMaxJump = .7f;
     public float timeToReachMaxSpeed = .15f;
-    public float maxSpeed = 6;
+    public float maxSpeed = 18;
 
     public LayerMask collidedLayer;
 
+    public GameObject flipObject;
+
     float fAccel;
     float jumpVelocity;
-    Vector3 vDirection;
+    static Vector3 vDirection;
     float sVelocity;
 
     float rayOffset = 0.1f;
-    public int horizontalRayCount = 6;
-    public int verticalRayCount = 6;
+    int horizontalRayCount = 6;
+    int verticalRayCount = 6;
 
-    public float maxClimbAngle = 80;
+    public float maxClimbAngle = 60;
     public float maxDescendAngle = 80;
 
     float hRaySpread;
@@ -88,7 +90,32 @@ public class PlayerControllerA : MonoBehaviour {
         float xVelocity = input.x * maxSpeed;
         vDirection.x = Mathf.SmoothDamp(vDirection.x, xVelocity, ref sVelocity, timeToReachMaxSpeed);
         vDirection.y += fAccel * Time.deltaTime;
+
+        if (vDirection.x > 0)
+        {
+            Debug.Log("Forward");
+            if (flipObject.transform.localScale.x < 0)
+            {
+                Debug.Log("Flip >");
+                flipObject.transform.localScale = new Vector3(1, 1, 1);
+            }
+        }
+        else if (vDirection.x < 0)
+        {
+            Debug.Log("Backwards");
+            if (flipObject.transform.localScale.x > 0)
+            {
+                Debug.Log("Flip <");
+                flipObject.transform.localScale = new Vector3(-1, 1, 1);
+            }
+        }
+
         Move(vDirection * Time.deltaTime);
+    }
+
+    static void addForce(Vector3 f)
+    {
+        vDirection += f;
     }
 
     public void Move(Vector3 velocity)
