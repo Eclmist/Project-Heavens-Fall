@@ -7,8 +7,12 @@ namespace UsefulStuff
 {
     public class HitSomethingDie : MonoBehaviour
     {
+
+        public LayerMask hitWhatDie;
+
         private SphereCollider sphCollider;
         private BoxCollider boxCollider;
+        private CapsuleCollider capsuleCollider;
 
         private bool hasRigidbody;
 
@@ -19,6 +23,8 @@ namespace UsefulStuff
 
             sphCollider = GetComponent<SphereCollider>();
             boxCollider = GetComponent<BoxCollider>();
+            capsuleCollider = GetComponent<CapsuleCollider>();
+
         }
 
         //If theres no rigidbody
@@ -26,9 +32,12 @@ namespace UsefulStuff
         {
             if (hasRigidbody) return;
 
-            if (sphCollider != null && Physics.CheckSphere(transform.position + sphCollider.center, sphCollider.radius))
+            if (sphCollider != null && Physics.CheckSphere(transform.position + sphCollider.center, sphCollider.radius, hitWhatDie))
                 Destroy(gameObject);
-            if (boxCollider != null && Physics.CheckBox(boxCollider.center, boxCollider.size/2, transform.rotation))
+            if (boxCollider != null && Physics.CheckBox(boxCollider.center, boxCollider.size/2, transform.rotation, hitWhatDie))
+                Destroy(gameObject);
+
+            if (capsuleCollider != null && capsuleCollider.height <= 0.1F && Physics.CheckSphere(transform.position + capsuleCollider.center, capsuleCollider.radius, hitWhatDie))
                 Destroy(gameObject);
         }
 

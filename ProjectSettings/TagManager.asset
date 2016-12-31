@@ -15,7 +15,7 @@ TagManager:
   - 
   - Player
   - Obstacles
-  - 
+  - Death
   - 
   - 
   - 
@@ -38,6 +38,12 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Back
+    uniqueID: 3507010003
+    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Front
+    uniqueID: 3398023163
     locked: 0
