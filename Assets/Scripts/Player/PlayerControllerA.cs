@@ -1,7 +1,10 @@
 ﻿ using UnityEngine;
 using System.Collections;
 
-public class PlayerControllerA : MonoBehaviour {
+public class PlayerControllerA : MonoBehaviour
+{
+
+    public static PlayerControllerA Instance;
 
     //Player
     public float maxJump = 8;
@@ -15,7 +18,7 @@ public class PlayerControllerA : MonoBehaviour {
 
     float fAccel;
     float jumpVelocity;
-    static Vector3 vDirection;
+    Vector3 vDirection;
     float sVelocity;
 
     float rayOffset = 0.1f;
@@ -109,7 +112,7 @@ public class PlayerControllerA : MonoBehaviour {
         Move(vDirection * Time.deltaTime);
     }
 
-    static void addForce(Vector3 f)
+    public void addForce(Vector3 f)
     {
         vDirection += f;
     }
