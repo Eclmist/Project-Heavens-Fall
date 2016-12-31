@@ -2,34 +2,48 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CameraBehaviour : MonoBehaviour {
+public class CameraBehaviour : MonoBehaviour
+{
+
+    public static CameraBehaviour Instance;
 
     public float CameraSpeed = 6;
-    public static float highestView = 18; 
-    public static float lowestView = -5;
+    public float yUpperBounds = 18; 
+    public float yLowerBounds = -5;
 
-    GameObject playerObject;
-    float cameraZoffset = -20;
-    Vector3 endPos;
-	
-	// Update is called once per frame
-	void Update () {
-		
-        if (playerObject == null)
+    public GameObject target;
+
+    float cameraZoffset;
+
+    void Awake()
+    {
+        Instance = this;
+    }
+
+    void Start()
+    {
+        cameraZoffset = transform.position.z;
+    }
+
+
+    // Update is called once per frame
+    void LateUpdate () {
+
+        if (target == null)
         {
-            playerObject = GameObject.FindGameObjectWithTag("Player");
+            target = GameObject.FindGameObjectWithTag("Player");
         }
         else
         {
-            endPos = new Vector3(playerObject.transform.position.x, Mathf.Clamp(playerObject.transform.position.y, lowestView, highestView), cameraZoffset);
-            transform.position = Vector3.Lerp(transform.position, endPos, CameraSpeed * Time.deltaTime);
+            Vector3 targetPos = new Vector3(target.transform.position.x, Mathf.Clamp(target.transform.position.y, yLowerBounds, yUpperBounds), cameraZoffset);
+            transform.position = Vector3.Lerp(transform.position, targetPos, CameraSpeed * Time.deltaTime);
         }
 	}
 
-    static void setCameraMaxMin(float max, float min)
+    void setCameraMaxMin(float max, float min)
     {
         //Function to allow different height bounds for different levels
-        highestView = max;
-        lowestView = min;
+        yUpperBounds = max;
+        yLowerBounds = min;
     }
 }

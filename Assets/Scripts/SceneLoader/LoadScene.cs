@@ -18,7 +18,7 @@ public class LoadScene : MonoBehaviour
     public void Load(int index)
     {
         // Load the loading screen scene
-        SceneManager.LoadSceneAsync(0);
+        SceneManager.LoadSceneAsync(1);
 
         if (!coroutineStarted)
             StartCoroutine(LoadLevelAsync(index));
