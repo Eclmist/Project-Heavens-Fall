@@ -25,6 +25,12 @@ public class LoadScene : MonoBehaviour
             StartCoroutine(LoadLevelAsync(index));
     }
 
+    public void Load(string name)
+    {
+        Load(SceneManager.GetSceneByName(name).buildIndex);
+    }
+
+
     IEnumerator LoadLevelAsync(int index)
     {
         coroutineStarted = true;

@@ -47,7 +47,6 @@ public class ProgressionManager : MonoBehaviour
             XmlSerializer serializer = new XmlSerializer(typeof(PlayerProgression));
             BinaryFormatter bf = new BinaryFormatter();
 
-            //TODO
             currentProfile = (PlayerProgression) bf.Deserialize(file);
             currentProfile.ReconstructDictionary();
             //print("Load"+currentProfile.names.Count + currentProfile.LevelsUnlocked);
@@ -74,7 +73,6 @@ public class ProgressionManager : MonoBehaviour
             XmlSerializer serializer = new XmlSerializer(typeof(PlayerProgression));
             BinaryFormatter bf = new BinaryFormatter();
 
-            //TODO
             //print("Save" + currentProfile.names.Count + currentProfile.LevelsUnlocked);
             bf.Serialize(file, currentProfile);
             file.Close();
