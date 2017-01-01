@@ -46,8 +46,7 @@ public class LevelManager : MonoBehaviour {
         }
 
         Assert.HardAssert(levelsToUnlock.Length>0,"There should be at least one level to unlock");
-        //TODO make samuel fix this
-        FindObjectOfType<LoadScene>().Load(SceneManager.GetSceneByName(levelsToUnlock[0]).buildIndex);
+        FindObjectOfType<LoadScene>().Load(levelsToUnlock[0]);
     }
 
 #if UNITY_EDITOR || UNITY_EDITOR_64 || UNITY_EDITOR_WIN
