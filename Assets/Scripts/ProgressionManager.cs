@@ -154,6 +154,25 @@ public class PlayerProgression
         return false;
     }
 
+    public bool IsLevelUnlocked(string levelId)
+    {
+        return PlayedLevels.ContainsKey(levelId);
+    }
+
+    public void SetLevelUnlocked(string levelId)
+    {
+        if (!PlayedLevels.ContainsKey(levelId)) AddNewLevelEntry(levelId, new Level());
+    }
+
+    public void SetLevelCleared(string levelId)
+    {
+        //AddNewLevelEntry(levelId,new Level());
+
+        Assert.SoftAssert(PlayedLevels.ContainsKey(levelId), "You shouldnt be clearing a level that you havent played yet. No Action Taken");
+        if (PlayedLevels.ContainsKey(levelId)) PlayedLevels[levelId].cleared = true;
+    }
+
+    
     public int GetCheckpointIndex(string levelId)
     {
         Assert.SoftAssert(PlayedLevels.ContainsKey(levelId), "You shouldnt be trying to get the checkpoint of a level you havent played." + StringLevelPairs.Count);
@@ -167,30 +186,13 @@ public class PlayerProgression
         PlayedLevels[levelId].checkpointIndex = checkpointIndex;
     }
 
-    public void UnlockLevel(string levelId)
-    {
-        if (!PlayedLevels.ContainsKey(levelId)) AddNewLevelEntry(levelId, new Level());
-    }
-
-    public bool IsLevelUnlocked(string levelId)
-    {
-        return PlayedLevels.ContainsKey(levelId);
-    }
-
-    public void SetLevelCleared(string levelId)
-    {
-        //AddNewLevelEntry(levelId,new Level());
-
-        Assert.SoftAssert(PlayedLevels.ContainsKey(levelId), "You shouldnt be clearing a level that you havent played yet. No Action Taken");
-        if (PlayedLevels.ContainsKey(levelId)) PlayedLevels[levelId].cleared = true;
-    }
-
+    //For Debug Purposes
     public void OverrideLevelCleared(string levelId)
     {
         //AddNewLevelEntry(levelId, new Level());
 
 
-        Debug.LogWarning("<color=#FF0000>Overriding Level cleared status. Creating entry if it doesnt exist</color>" + StringLevelPairs.Count);
+        Debug.LogWarning("<color=#FF0000><b>Overriding Level cleared status. Creating entry if it doesnt exist</b></color>" + StringLevelPairs.Count);
         if (!PlayedLevels.ContainsKey(levelId)) AddNewLevelEntry(levelId, new Level());
         PlayedLevels[levelId].cleared = true;
     }
