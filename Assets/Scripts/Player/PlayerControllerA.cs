@@ -194,7 +194,7 @@ public class PlayerControllerA : MonoBehaviour
     void VerticalCollisions(ref Vector3 velocity)
     {
         float yDir = Mathf.Sign(velocity.y);
-        float rayLength = Mathf.Abs(velocity.y) + rayOffset;
+        float rayLength = Mathf.Abs(velocity.y) + rayOffset + 0.05F;
 
         for (int i = 0; i < verticalRayCount; i++)
         {

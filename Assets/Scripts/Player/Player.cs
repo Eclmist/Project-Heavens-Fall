@@ -38,6 +38,11 @@ public class Player : MonoBehaviour
         }
     }
 
+    public static void SetSpawnLocation(Vector3 position)
+    {
+        spawnPosition = position;
+    }
+
     public static void KillPlayer()
     {
         KillPlayer(true);
