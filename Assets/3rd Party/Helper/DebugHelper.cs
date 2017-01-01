@@ -136,6 +136,7 @@ public class DebugHelper : MonoBehaviour
         return data;
     }
 
+    [Obsolete("Use object index reference instead")]
     public static void RemoveLine(ref DebugData data )
     {
         //Check if is debug build else do nothing
@@ -147,6 +148,16 @@ public class DebugHelper : MonoBehaviour
         if (debugDataSet.Count == 0 && dynamicDebugDataSet.Count == 0)
         {
             Destroy(instance);
+        }
+    }
+
+    public static void RemoveLine(GameObject source, int index)
+    {
+        InstanceIndexKeyPair key = new InstanceIndexKeyPair(source.GetInstanceID(), index);
+        if (debugDataStore.ContainsKey(key))
+        {
+            debugDataSet.Remove(debugDataStore[key]);
+            debugDataStore.Remove(key);
         }
     }
 

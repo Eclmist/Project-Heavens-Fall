@@ -136,14 +136,14 @@ public class ProgressionManagerTester {
 
         //Create multiple Profiles
         ProgressionManager.CreateNewProfile("TestProfile1");
-        ProgressionManager.CurrentProfile.UnlockLevel("UnitTestLevel1");
-        ProgressionManager.CurrentProfile.UnlockLevel("UnitTestLevel2");
-        ProgressionManager.CurrentProfile.UnlockLevel("UnitTestLevel3");
+        ProgressionManager.CurrentProfile.SetLevelUnlocked("UnitTestLevel1");
+        ProgressionManager.CurrentProfile.SetLevelUnlocked("UnitTestLevel2");
+        ProgressionManager.CurrentProfile.SetLevelUnlocked("UnitTestLevel3");
         ProgressionManager.SaveProfile();
         ProgressionManager.CreateNewProfile("TestProfile2");
-        ProgressionManager.CurrentProfile.UnlockLevel("UnitTestLevel4");
-        ProgressionManager.CurrentProfile.UnlockLevel("UnitTestLevel5");
-        ProgressionManager.CurrentProfile.UnlockLevel("UnitTestLevel6");
+        ProgressionManager.CurrentProfile.SetLevelUnlocked("UnitTestLevel4");
+        ProgressionManager.CurrentProfile.SetLevelUnlocked("UnitTestLevel5");
+        ProgressionManager.CurrentProfile.SetLevelUnlocked("UnitTestLevel6");
         ProgressionManager.SaveProfile();
         ProgressionManager.CreateNewProfile("TestProfile3");
         ProgressionManager.SaveProfile();

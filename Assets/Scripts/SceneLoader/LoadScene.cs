@@ -15,6 +15,7 @@ public class LoadScene : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
+    //TODO: Samuel: Make some overloads for this function
     public void Load(int index)
     {
         // Load the loading screen scene
