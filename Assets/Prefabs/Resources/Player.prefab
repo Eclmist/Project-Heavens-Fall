@@ -59,6 +59,7 @@ GameObject:
   - component: {fileID: 114281896139635120}
   - component: {fileID: 114023316351943528}
   - component: {fileID: 54717272323848886}
+  - component: {fileID: 114649627638179694}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -441,8 +442,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   flipObject: {fileID: 1275938081291378}
-  maxClimbAngle: 60
-  maxDescendAngle: 80
+  maxClimbAngle: 50
+  maxDescendAngle: 50
 --- !u!114 &114281896139635120
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -457,6 +458,22 @@ MonoBehaviour:
   hitWhatDie:
     serializedVersion: 2
     m_Bits: 1024
+--- !u!114 &114649627638179694
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1636326638965686}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87d9af5ea035fb345ba0c41fd15e5b83, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 10
+  left: 97
+  right: 100
+  up: 119
+  down: 115
 --- !u!136 &136383462304834768
 CapsuleCollider:
   m_ObjectHideFlags: 1
