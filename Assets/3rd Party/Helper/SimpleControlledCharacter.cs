@@ -41,7 +41,7 @@ namespace UsefulStuff
             if (!ghosting) return;
 
             float tempSpeed = speed;
-            if (Input.GetKey(KeyCode.LeftShift)) tempSpeed *= 3;
+            if (Input.GetKey(KeyCode.LeftShift)) tempSpeed *= 1.5F;
 
 
             if (!useCustomKeycodes)
