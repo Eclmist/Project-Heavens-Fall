@@ -56,7 +56,7 @@ public class Fire : MonoBehaviour
 
             if (insideUnitSphere.x> 0) obj.transform.localScale.Scale(new Vector3(-1,1,1));
 
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(0.8734f);
         }
     }
 }

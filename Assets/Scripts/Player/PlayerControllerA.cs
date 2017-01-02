@@ -114,7 +114,10 @@ public class PlayerControllerA : MonoBehaviour
 
     public void addForce(Vector3 f)
     {
-        vDirection += f;
+    
+        myCollision.below = false;
+
+        vDirection += f;        
     }
 
     public void Move(Vector3 velocity)

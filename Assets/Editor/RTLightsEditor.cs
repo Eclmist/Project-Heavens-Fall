@@ -9,7 +9,6 @@ public class RTLightsEditor : Editor
     void OnSceneGUI()
     {
         RTLights light = (RTLights)target;
-        Vector3 cameraPos = Camera.main.transform.position;
 
         Vector3 viewAngleA = light.DirFromAngle(-light.angle/ 2, false);
         Vector3 viewAngleB = light.DirFromAngle(light.angle / 2, false);
