@@ -109,6 +109,7 @@ public class PlayerControllerA : MonoBehaviour
             }
         }
 
+        vDirection.z = 0;
         Move(vDirection * Time.deltaTime);
     }
 
