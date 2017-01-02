@@ -7,10 +7,10 @@ public class Fire : MonoBehaviour
 
     private bool isTriggered;
 
-    private static GameObject wispToSpawn; 
+    private static GameObject[] wispToSpawn; 
 
     //TODO Remove override for debug spawning
-    public GameObject objectToTestSpawn;
+    //public GameObject objectToTestSpawn;
 
 
     void OnTriggerEnter()
@@ -19,16 +19,17 @@ public class Fire : MonoBehaviour
 
         isTriggered = true;
 
-        if (!wispToSpawn)
+        if (wispToSpawn == null)
         {
             //TODO Remove
-            if (objectToTestSpawn)
-            {
-                wispToSpawn = objectToTestSpawn;
-            }
-            else
+            //if (objectToTestSpawn != null)
+            //{
+            //    wispToSpawn = new []{objectToTestSpawn};
+            //}
+            //else
             //END remove
-            wispToSpawn = Resources.Load<GameObject>("Wisp");
+            wispToSpawn = Resources.LoadAll<GameObject>("Wisp");
+            print(wispToSpawn.Length);
         }
 
         transform.GetChild(0).gameObject.SetActive(true);
@@ -42,7 +43,8 @@ public class Fire : MonoBehaviour
 
         for (int i = 0; i < count; i++)
         {
-            Vector3 position = Random.insideUnitSphere * 1.5f + transform.position;
+            Vector3 insideUnitSphere = Random.insideUnitSphere;
+            Vector3 position = insideUnitSphere * 1.5f + transform.position;
             RaycastHit hit;
             Physics.Raycast(new Ray(position, Vector3.down), out hit);
 
@@ -50,7 +52,9 @@ public class Fire : MonoBehaviour
 
             //TODO: set Height for the spawned wisp
             
-            Instantiate(wispToSpawn, position + Vector3.up * Random.Range(0.5f,0.8f), Quaternion.identity);
+            GameObject obj = Instantiate(wispToSpawn[Random.Range(0,wispToSpawn.Length)], position + Vector3.up * Random.Range(0.5f,0.8f), Quaternion.identity);
+
+            if (insideUnitSphere.x> 0) obj.transform.localScale.Scale(new Vector3(-1,1,1));
 
             yield return new WaitForSeconds(0.5f);
         }
