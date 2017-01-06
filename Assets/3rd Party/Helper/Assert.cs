@@ -10,7 +10,16 @@ public static class Assert{
         if (!Debug.isDebugBuild) UAssert.raiseExceptions = true;
         if (message != "") UAssert.IsTrue(isTrue, message);
         else UAssert.IsTrue(isTrue);
-        if (!isTrue) Debug.Break();
+
+        if (!isTrue)
+        {
+#if UNITY_EDITOR
+            Debug.Break();
+#else
+            Application.Quit();
+#endif
+        }
+
         if (!Debug.isDebugBuild) UAssert.raiseExceptions = false;
     }
 
