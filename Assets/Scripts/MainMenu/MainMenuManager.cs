@@ -45,6 +45,17 @@ public class MainMenuManager : MonoBehaviour
 
         LevelSelectorActive(false);
 
+        int i = 0;
+
+        foreach (Button levelBtn in btn_levels)
+        {
+            i ++;
+           levelBtn.name = "Level" + ((i <=9) ? "0" + i.ToString(): i.ToString());
+           levelBtn.GetComponentInChildren<Text>().text = "Level " + ((i <= 9) ? "0" + i.ToString() : i.ToString());
+
+        }
+
+
         if (ProgressionManager.CurrentProfile.IsLevelCleared(btn_levels[0].name))
         {
             foreach (Button levelBtn in btn_levels)
@@ -75,7 +86,18 @@ public class MainMenuManager : MonoBehaviour
     public void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
-            LevelSelectorActive(false); 
+            LevelSelectorActive(false);
+
+        if (Input.GetKey(KeyCode.F9))
+        {
+            btn_levelSelect.interactable = true;
+
+            foreach (Button levelBtn in btn_levels)
+            {
+                levelBtn.interactable = true;
+                latestLevel = levelBtn.name;
+            }
+        }
     }
 
     public void LevelSelectorActive(bool active)
@@ -104,9 +126,20 @@ public class MainMenuManager : MonoBehaviour
         LevelSelectorActive(!levelSelectOpen);
     }
 
+    public void NewGame()
+    {
+        ProgressionManager.CurrentProfile.SetLevelUnlocked("Level01");
+        FindObjectOfType<LoadScene>().Load("Level01");
+    }
+
     public void Continue()
     {
         FindObjectOfType<LoadScene>().Load(latestLevel);
+    }
+
+    public void LoadLevel(GameObject levelBtn)
+    {
+        FindObjectOfType<LoadScene>().Load(levelBtn.name);
     }
 
     public void Quit()

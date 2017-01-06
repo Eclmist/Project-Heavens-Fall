@@ -13,3 +13,5 @@ EditorBuildSettings:
     path: Assets/Scenes/DemoScenes/Test.unity
   - enabled: 1
     path: Assets/Scenes/DemoScenes/PrototypeLevel1.unity
+  - enabled: 1
+    path: Assets/Scenes/DemoScenes/Level01.unity
