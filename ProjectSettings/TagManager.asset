@@ -36,7 +36,7 @@ TagManager:
   - 
   - 
   - 
-  - 
+  - AntiPicking
   m_SortingLayers:
   - name: Back
     uniqueID: 3507010003

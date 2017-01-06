@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class DebugProfile : MonoBehaviour {
 
@@ -9,6 +10,7 @@ public class DebugProfile : MonoBehaviour {
 	    if (ProgressionManager.CurrentProfile == null)
 	    {
 	        ProgressionManager.CreateNewProfile();
+            ProgressionManager.CurrentProfile.SetLevelUnlocked(SceneManager.GetActiveScene().name);
 	    }
         Destroy(gameObject);
 	}
