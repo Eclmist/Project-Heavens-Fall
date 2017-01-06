@@ -96,6 +96,8 @@ public class MainMenuManager : MonoBehaviour
             {
                 levelBtn.interactable = true;
                 latestLevel = levelBtn.name;
+                ProgressionManager.CurrentProfile.SetLevelUnlocked(levelBtn.name);
+
             }
         }
     }
