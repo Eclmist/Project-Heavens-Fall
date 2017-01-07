@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 33542037584599800}
   - component: {fileID: 23037268648336874}
   - component: {fileID: 95930551885176030}
+  - component: {fileID: 64780376411305110}
   m_Layer: 0
   m_Name: Shard
   m_TagString: Untagged
@@ -36,7 +37,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1905941757253514}
   m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 23.776396, y: 14.104, z: -34.872013}
+  m_LocalPosition: {x: -10.556109, y: -3.2447886, z: 0.09}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -79,6 +80,20 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1905941757253514}
+  m_Mesh: {fileID: 4300000, guid: 6797ee89849559e478cca1c31ef44f89, type: 3}
+--- !u!64 &64780376411305110
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1905941757253514}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 1
+  m_InflateMesh: 0
+  m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300000, guid: 6797ee89849559e478cca1c31ef44f89, type: 3}
 --- !u!95 &95930551885176030
 Animator:
