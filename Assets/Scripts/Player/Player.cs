@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Analytics;
 
 public class Player : MonoBehaviour
 {
@@ -53,6 +54,12 @@ public class Player : MonoBehaviour
         if (Instance != null)
         {
             Instance.StartCoroutine(Instance.Death(respawn));
+
+            Analytics.CustomEvent("playerDeath", new Dictionary<string, object>
+            {
+                {"Position", (Vector2) Instance.transform.position},
+                {"Level", (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name)}
+            });
         }
     }
 

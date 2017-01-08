@@ -452,8 +452,11 @@ PlayerSettings:
   XboxOneAllowedProductIds: []
   XboxOnePersistentLocalStorageSize: 0
   vrEditorSettings: {}
-  cloudServicesEnabled: {}
-  cloudProjectId: 
-  projectName: 
-  organizationId: 
+  cloudServicesEnabled:
+    Build: 1
+    Collab: 0
+    UNet: 1
+  cloudProjectId: 87b83c30-25c3-4e74-9c56-89dddadea013
+  projectName: Heavens Fall
+  organizationId: darkdestry
   cloudEnabled: 0
