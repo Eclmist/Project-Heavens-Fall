@@ -9,7 +9,7 @@ namespace UsefulStuff
     {
         public float speed;
 
-        [Header("Custom controls")] private bool useCustomKeycodes;
+        [Header("Custom controls")] public bool useCustomKeycodes;
 
         public KeyCode left = KeyCode.A;
         public KeyCode right = KeyCode.D;

@@ -9,7 +9,9 @@ public class LevelManager : MonoBehaviour {
     
     private Transform currentCheckpoint;
 
+#pragma warning disable 649
     [SerializeField] private string[] levelsToUnlock;
+#pragma warning restore 649
 
     void Awake()
     {

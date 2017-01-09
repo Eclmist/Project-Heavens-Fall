@@ -6,7 +6,7 @@ public class DeathOnImpact : MonoBehaviour {
 
     public LayerMask hitWhatDie;
 
-    private CapsuleCollider collider;
+    private new CapsuleCollider collider;
 
     void Start()
     {

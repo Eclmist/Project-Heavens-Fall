@@ -44,7 +44,7 @@ public class ProgressionManager : MonoBehaviour
             Application.persistentDataPath + "/" + profileName + ".save", FileMode.Open);
         try
         {
-            XmlSerializer serializer = new XmlSerializer(typeof(PlayerProgression));
+            //XmlSerializer serializer = new XmlSerializer(typeof(PlayerProgression));
             BinaryFormatter bf = new BinaryFormatter();
 
             currentProfile = (PlayerProgression) bf.Deserialize(file);
@@ -70,7 +70,7 @@ public class ProgressionManager : MonoBehaviour
             Application.persistentDataPath + "/" + currentProfile.profileName + ".save", FileMode.OpenOrCreate);
         try
         {
-            XmlSerializer serializer = new XmlSerializer(typeof(PlayerProgression));
+            //XmlSerializer serializer = new XmlSerializer(typeof(PlayerProgression));
             BinaryFormatter bf = new BinaryFormatter();
 
             //print("Save" + currentProfile.names.Count + currentProfile.LevelsUnlocked);

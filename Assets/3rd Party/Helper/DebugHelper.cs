@@ -14,47 +14,47 @@ using UnityEngine.UI;
 /// Last Modification: 13/11/2016
 /// </summary>
 
-#if UNITY_EDITOR || UNITY_EDITOR_64
-//===================== Usage info =========================
-internal class ExampleUsageMethod1
-{
-    //Ignore this
-    private GameObject gameObject;
-    //Stop Ignoring
+//#if UNITY_EDITOR || UNITY_EDITOR_64
+////===================== Usage info =========================
+//internal class ExampleUsageMethod1
+//{
+//    //Ignore this
+//    private GameObject gameObject;
+//    //Stop Ignoring
 
-    DebugHelper.DebugData data;
+//    DebugHelper.DebugData data;
 
-    protected void Update()
-    {
-        if (data == null)
-        {
-            data = DebugHelper.AddLine(gameObject, "Insert starting text here", Color.red);
-        }
-    }
+//    protected void Update()
+//    {
+//        if (data == null)
+//        {
+//            data = DebugHelper.AddLine(gameObject, "Insert starting text here", Color.red);
+//        }
+//    }
 
-}
+//}
 
-internal class ExampleUsageMethod2
-{
-    //Ignore this
-    private GameObject gameObject;
-    //Stop Ignoring
+//internal class ExampleUsageMethod2
+//{
+//    //Ignore this
+//    private GameObject gameObject;
+//    //Stop Ignoring
 
-    DebugHelper.DebugData data;
+//    DebugHelper.DebugData data;
 
-    protected void Start()
-    {
-        data = DebugHelper.AddLine(gameObject, "Insert starting text here", Color.red);
-    }
+//    protected void Start()
+//    {
+//        data = DebugHelper.AddLine(gameObject, "Insert starting text here", Color.red);
+//    }
 
-    protected void Update()
-    {
-        data.debugString = "something";
-        data.color = Color.red;
-    }
-}
-//============================================================//
-#endif
+//    protected void Update()
+//    {
+//        data.debugString = "something";
+//        data.color = Color.red;
+//    }
+//}
+////============================================================//
+//#endif
 
 
 public class DebugHelper : MonoBehaviour
