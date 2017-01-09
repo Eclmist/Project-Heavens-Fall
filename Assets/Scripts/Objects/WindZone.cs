@@ -10,7 +10,9 @@ public class WindZone : MonoBehaviour {
     public float windForce;
     public float radius = 2.0f;
 
-    private new SphereCollider collider;
+#pragma warning disable 108,114
+    private SphereCollider collider;
+#pragma warning restore 108,114
 
 	// Use this for initialization
 	void Start ()

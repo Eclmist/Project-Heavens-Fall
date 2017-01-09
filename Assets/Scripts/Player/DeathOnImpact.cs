@@ -6,7 +6,9 @@ public class DeathOnImpact : MonoBehaviour {
 
     public LayerMask hitWhatDie;
 
-    private new CapsuleCollider collider;
+#pragma warning disable 108,114
+    private CapsuleCollider collider;
+#pragma warning restore 108,114
 
     void Start()
     {
