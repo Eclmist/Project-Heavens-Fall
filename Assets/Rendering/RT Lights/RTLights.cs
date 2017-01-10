@@ -8,6 +8,7 @@ using UnityEngine;
 [RequireComponent(typeof(MeshRenderer))]
 public class RTLights : MonoBehaviour
 {
+#pragma warning disable 108,114
 
     [Range(0, 360)] public float angle;
     [Range(0, 5)] public float resolution;
@@ -26,7 +27,10 @@ public class RTLights : MonoBehaviour
     private MeshFilter lightMeshFilter;
     private Mesh lightMesh;
 
-    private List<Vector3> vertexList = new List<Vector3>();
+    //TODO: SAMUEL! FIX unused variable 
+    //private List<Vector3> vertexList = new List<Vector3>();
+
+#pragma warning restore 108, 114
 
     void Start ()
     {
@@ -56,7 +60,8 @@ public class RTLights : MonoBehaviour
 
         for (int i = 0; i <= rayCount; i++)
         {
-            float currentStepAngle = transform.eulerAngles.z - angle/2 + stepAngleSize*i;
+            //TODO: SAMUEL! FIX unused variable 
+            //float currentStepAngle = transform.eulerAngles.z - angle/2 + stepAngleSize*i;
             RTInfo currentRtInfo = RayTrace(- angle/2 +stepAngleSize * i);
 
             if (i > 0)

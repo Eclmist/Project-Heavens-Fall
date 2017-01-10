@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class ActionIntervalTimer
 {
-    private MonoBehaviour attachedBehaviour;
+    //private MonoBehaviour attachedBehaviour;
     private Action action;
     public bool running = true;
     private float interval;
@@ -20,7 +20,7 @@ public class ActionIntervalTimer
     {
         this.interval = interval;
         this.action = action;
-        this.attachedBehaviour = attachedBehaviour;
+        //this.attachedBehaviour = attachedBehaviour;
         attachedBehaviour.StartCoroutine(Repeater());
     }
 

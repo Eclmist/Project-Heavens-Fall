@@ -39,4 +39,35 @@ public class WindZone : MonoBehaviour {
             other.gameObject.GetComponent<PlayerControllerA>().addForce(transform.forward * windForce);
         }
     }
+
+    void OnDrawGizmos()
+    {
+        //Debug.DrawLine(transform.position-transform.up, transform.position+transform.up, Color.white);
+        //Debug.DrawLine(transform.position-transform.up + transform.forward * 3, transform.position-transform.up* 2 + transform.forward * 3, Color.white);
+        //Debug.DrawLine(transform.position+transform.up + transform.forward * 3, transform.position+transform.up* 2 + transform.forward * 3, Color.white);
+        //Debug.DrawLine(transform.position+transform.forward*6, transform.position+transform.up* 2 + transform.forward * 3, Color.white);
+        //Debug.DrawLine(transform.position+transform.forward*6, transform.position-transform.up* 2 + transform.forward * 3, Color.white);
+        //Debug.DrawLine(transform.position+transform.up, transform.position+transform.up + transform.forward * 3, Color.white);
+        ////Debug.DrawLine(transform.position-transform.up + transform.forward * 3, transform.position+transform.up + transform.forward * 3, Color.white);
+        //Debug.DrawLine(transform.position-transform.up, transform.position-transform.up + transform.forward * 3, Color.white);
+
+        //Debug.DrawLine(transform.position - transform.right, transform.position + transform.right, Color.white);
+        //Debug.DrawLine(transform.position - transform.right + transform.forward * 3, transform.position - transform.right * 2 + transform.forward * 3, Color.white);
+        //Debug.DrawLine(transform.position + transform.right + transform.forward * 3, transform.position + transform.right * 2 + transform.forward * 3, Color.white);
+        //Debug.DrawLine(transform.position + transform.forward * 6, transform.position + transform.right * 2 + transform.forward * 3, Color.white);
+        //Debug.DrawLine(transform.position + transform.forward * 6, transform.position - transform.right * 2 + transform.forward * 3, Color.white);
+        //Debug.DrawLine(transform.position + transform.right, transform.position + transform.right + transform.forward * 3, Color.white);
+        ////Debug.DrawLine(transform.position-transform.right + transform.forward * 3, transform.position+transform.right + transform.forward * 3, Color.white);
+        //Debug.DrawLine(transform.position - transform.right, transform.position - transform.right + transform.forward * 3, Color.white);
+
+        Helper.DrawDebugArrow(transform.position, transform.position+transform.forward*6,1);
+
+        if (collider == null)
+        {
+            collider = GetComponent<SphereCollider>();
+        }
+
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(transform.position, collider.radius*transform.localScale.x);
+    }
 }

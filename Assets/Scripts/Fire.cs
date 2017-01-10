@@ -10,7 +10,7 @@ public class Fire : MonoBehaviour
     private static GameObject[] wispToSpawn; 
 
     private List<Vector3> fagBag = new List<Vector3>();
-    public List<Vector3> fagBagBackup;
+    private List<Vector3> fagBagBackup;
 
     //TODO Remove override for debug spawning
     //public GameObject objectToTestSpawn;

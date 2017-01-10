@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using UnityEngine;
-using Debug = System.Diagnostics.Debug;
+//using Debug = System.Diagnostics.Debug;
 
 public partial class Helper : MonoBehaviour
 {
@@ -91,5 +91,35 @@ public partial class Helper : MonoBehaviour
     private static void CreateHelperObject()
     {
         HelperObject = new GameObject("HelperObject",typeof(Helper)).GetComponent<Helper>();
+    }
+
+
+    public static void DrawDebugArrow(Vector3 from, Vector3 to, float width)
+    {
+        DrawDebugArrow(from,to,width,Color.white);
+    }
+
+    public static void DrawDebugArrow(Vector3 from, Vector3 to, float width, Color color)
+    {
+        Vector3 dir = to - from;
+        Vector3 right = Vector3.Cross(dir,Vector3.up).normalized;
+        if (right == Vector3.zero)right = Vector3.right;
+        Vector3 up = Vector3.Cross(right, dir).normalized;
+
+        Debug.DrawLine(from - up *width, from + up *width, color);
+        Debug.DrawLine(from - up *width + dir / 2, from - up *width * 2 + dir / 2, color);
+        Debug.DrawLine(from + up *width + dir / 2, from + up *width * 2 + dir / 2, color);
+        Debug.DrawLine(from + dir, from + up *width * 2 + dir / 2, color);
+        Debug.DrawLine(from + dir, from - up *width * 2 + dir / 2, color);
+        Debug.DrawLine(from + up *width, from + up *width + dir / 2, color);
+        Debug.DrawLine(from - up *width, from - up *width + dir / 2, color);
+
+        Debug.DrawLine(from - right *width, from + right *width, color);
+        Debug.DrawLine(from - right *width + dir / 2, from - right *width * 2 + dir / 2, color);
+        Debug.DrawLine(from + right *width + dir / 2, from + right *width * 2 + dir / 2, color);
+        Debug.DrawLine(from + dir, from + right *width * 2 + dir / 2, color);
+        Debug.DrawLine(from + dir, from - right *width * 2 + dir / 2, color);
+        Debug.DrawLine(from + right *width, from + right *width + dir / 2, color);
+        Debug.DrawLine(from - right *width, from - right *width + dir / 2, color);
     }
 }
