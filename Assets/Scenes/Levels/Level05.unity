@@ -3969,6 +3969,11 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 114743364990199522, guid: 4a589021ba202d94aad94edd5c6939f9,
+        type: 2}
+      propertyPath: levelsToUnlock.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4440609058244406, guid: 4a589021ba202d94aad94edd5c6939f9, type: 2}
       propertyPath: m_LocalPosition.x
       value: 25.074749
@@ -4000,6 +4005,11 @@ Prefab:
     - target: {fileID: 4440609058244406, guid: 4a589021ba202d94aad94edd5c6939f9, type: 2}
       propertyPath: m_RootOrder
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 114743364990199522, guid: 4a589021ba202d94aad94edd5c6939f9,
+        type: 2}
+      propertyPath: levelsToUnlock.Array.data[0]
+      value: Level06
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4a589021ba202d94aad94edd5c6939f9, type: 2}
