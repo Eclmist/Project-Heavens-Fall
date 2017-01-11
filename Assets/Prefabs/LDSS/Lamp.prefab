@@ -251,7 +251,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000588153769594}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -2.3343377, y: 7.144773, z: 5.14}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4164128134317406}
@@ -302,7 +302,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 8f8c4a87521afb64b8435465ecb6acce, type: 2}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -333,8 +333,8 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 78eac253878d46d49bbf03f75d71b6e9, type: 2}
-  - {fileID: 2100000, guid: 3ca2ab929234fb94b87b8b2e1569f8bb, type: 2}
+  - {fileID: 2100000, guid: d8147f37435792f4597fc4bd968234c7, type: 2}
+  - {fileID: 2100000, guid: d2bbb0e2103200a4783a4bebba8195cb, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -396,7 +396,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 94bab72ab94527c418c5ff9f8046cecb, type: 2}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -427,7 +427,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 94bab72ab94527c418c5ff9f8046cecb, type: 2}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -479,7 +479,7 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1594952094457044}
-  m_Mesh: {fileID: 4300000, guid: 2c6c8a56a927aa249adade0e364f5781, type: 3}
+  m_Mesh: {fileID: 4300006, guid: 4e119d5f1baf0344babd8f34da28cd72, type: 3}
 --- !u!108 &108347328813981516
 Light:
   m_ObjectHideFlags: 1
@@ -545,6 +545,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c591ea26dc345ba44940f634bcc16f36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  offsetSpawning: {x: 0, y: 0, z: 0}
 --- !u!135 &135649389492491436
 SphereCollider:
   m_ObjectHideFlags: 1

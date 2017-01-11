@@ -11,6 +11,7 @@ public class Fire : MonoBehaviour
 
     private List<Vector3> fagBag = new List<Vector3>();
     private List<Vector3> fagBagBackup;
+    public Vector3 offsetSpawning;
 
     //TODO Remove override for debug spawning
     //public GameObject objectToTestSpawn;
@@ -77,7 +78,7 @@ public class Fire : MonoBehaviour
         for (int i = 0; i < count; i++)
         {
             Vector3 insideUnitSphere = GetRandomPos();
-            Vector3 position = insideUnitSphere * 1.5f + transform.position;
+            Vector3 position = insideUnitSphere * 1.5f + transform.position + offsetSpawning;
             position.z += Random.Range(-1f, 1f);
             RaycastHit hit;
             Physics.Raycast(new Ray(position, Vector3.down), out hit, 999, LayerMask.GetMask("Obstacles"));
@@ -98,6 +99,25 @@ public class Fire : MonoBehaviour
             }
 
             yield return new WaitForSeconds(0.8734f);
+        }
+    }
+
+    void OnDrawGizmos()
+    {
+        if (Debug.isDebugBuild)
+        {
+            if (offsetSpawning != Vector3.zero)
+            {
+                Gizmos.color = Color.yellow;
+                Gizmos.DrawSphere(transform.position + offsetSpawning, 0.3f);
+            }
+            RaycastHit hit;
+            if (Physics.Raycast(transform.position + offsetSpawning, Vector3.down, out hit))
+                Helper.DrawDebugArrow(transform.position + offsetSpawning, hit.point,0.5f);
+            else
+                Helper.DrawDebugArrow(transform.position + offsetSpawning, transform.position + offsetSpawning + Vector3.down*2, 0.5f, Color.red);
+
+
         }
     }
 }
