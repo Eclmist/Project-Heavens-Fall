@@ -67,16 +67,14 @@ public class PlayerControllerA : MonoBehaviour
 
     void Start()
     {
-        
         fAccel = -(2 * maxJump) / Mathf.Pow(timeToReachMaxJump, 2);
         jumpVelocity = Mathf.Abs(fAccel) * timeToReachMaxJump;
         
         myCollider = GetComponent<CapsuleCollider>();
         CalculateRaySpacing();
     }
-
-    // Update is called once per frame
-    void Update()
+    
+    void FixedUpdate()
     {        
         if (myCollision.above || myCollision.below)
         {
