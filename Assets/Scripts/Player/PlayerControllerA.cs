@@ -20,6 +20,9 @@ public class PlayerControllerA : MonoBehaviour
     float jumpVelocity;
     Vector3 vDirection;
     float sVelocity;
+    Vector2 input;
+
+    bool jumpping = false;
 
     float rayOffset = 0.1f;
     int horizontalRayCount = 6;
@@ -73,24 +76,22 @@ public class PlayerControllerA : MonoBehaviour
         myCollider = GetComponent<CapsuleCollider>();
         CalculateRaySpacing();
     }
-    
-    void FixedUpdate()
-    {        
-        if (myCollision.above || myCollision.below)
+
+    void Update()
+    {
+        if ((myCollision.above || myCollision.below))
         {
             vDirection.y = 0;
         }
 
-        Vector2 input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 
         if (Input.GetKeyDown(KeyCode.Space) && myCollision.below)
         {
-            vDirection.y = jumpVelocity;
-        }
+            Debug.Log("Space Pressed");
+            jumpping = true;
 
-        float xVelocity = input.x * maxSpeed;
-        vDirection.x = Mathf.SmoothDamp(vDirection.x, xVelocity, ref sVelocity, timeToReachMaxSpeed);
-        vDirection.y += fAccel * Time.deltaTime;
+        }
 
         if (vDirection.x > 0)
         {
@@ -106,7 +107,18 @@ public class PlayerControllerA : MonoBehaviour
                 flipObject.transform.localScale = new Vector3(-1, 1, 1);
             }
         }
+    }
 
+    void FixedUpdate()
+    {
+        if (jumpping)
+        {
+            vDirection.y = jumpVelocity;
+            jumpping = false;
+        }
+        float xVelocity = input.x * maxSpeed;
+        vDirection.x = Mathf.SmoothDamp(vDirection.x, xVelocity, ref sVelocity, timeToReachMaxSpeed);
+        vDirection.y += fAccel * Time.deltaTime;
         vDirection.z = 0;
         Move(vDirection * Time.deltaTime);
     }
