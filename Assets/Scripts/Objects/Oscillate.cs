@@ -21,4 +21,9 @@ public class Oscillate : MonoBehaviour
 	// Update is called once per frame
 	void Update () {
 	}
+
+    void OnDrawGizmos()
+    {
+        Helper.DrawDebugArrow(transform.position, transform.position+ oscillationAmount, 0.5f, Color.yellow);
+    }
 }

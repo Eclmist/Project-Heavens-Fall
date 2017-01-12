@@ -8,10 +8,13 @@ public class WindZone : MonoBehaviour {
     public ParticleSystem windParticle;
 
     public float windForce;
+    [Header("If Sphere collider")]
     public float radius = 2.0f;
+    [Header("If box collider")]
+    public Vector3 size;
 
 #pragma warning disable 108,114
-    private SphereCollider collider;
+    private Collider collider;
 #pragma warning restore 108,114
 
 	// Use this for initialization
@@ -23,13 +26,15 @@ public class WindZone : MonoBehaviour {
         ParticleSystem.EmissionModule windEmission = windParticle.emission;
         windEmission.rateOverTime = radius * 50.0f;
 
-	    collider = GetComponent<SphereCollider>();
+	    collider = GetComponent<Collider>();
     }
 	
 	// Update is called once per frame
 	void Update ()
 	{
-	    collider.radius = radius;
+        if (collider is SphereCollider) (collider as SphereCollider).radius = radius;
+        else if (collider is BoxCollider) (collider as BoxCollider).size = size;
+        else Assert.HardAssert(false, "Wind zone collider is not sphere or box collider ");
 	}
 
     void OnTriggerStay(Collider other)
@@ -64,10 +69,15 @@ public class WindZone : MonoBehaviour {
 
         if (collider == null)
         {
-            collider = GetComponent<SphereCollider>();
+            collider = GetComponent<Collider>();
         }
 
         Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(transform.position, collider.radius*transform.localScale.x);
+        if (collider is SphereCollider) Gizmos.DrawWireSphere(transform.position, (collider as SphereCollider).radius*transform.localScale.x);
+        else if (collider is BoxCollider) Gizmos.DrawWireCube(transform.position + transform.rotation * (collider as BoxCollider).center, transform.rotation * (collider as BoxCollider).size);
+        else
+        {
+            Helper.DrawDebugArrow(transform.position, transform.position + transform.forward * 6, 1, Color.red);
+        }
     }
 }
