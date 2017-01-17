@@ -74,7 +74,13 @@ public class WindZone : MonoBehaviour {
 
         Gizmos.color = Color.green;
         if (collider is SphereCollider) Gizmos.DrawWireSphere(transform.position, (collider as SphereCollider).radius*transform.localScale.x);
-        else if (collider is BoxCollider) Gizmos.DrawWireCube(transform.position + transform.rotation * (collider as BoxCollider).center, transform.rotation * (collider as BoxCollider).size);
+        else if (collider is BoxCollider)
+        {
+            Gizmos.matrix = Matrix4x4.TRS(transform.position, transform.rotation, Vector3.one);
+            Gizmos.DrawWireCube((collider as BoxCollider).center, (collider as BoxCollider).size);
+            Gizmos.matrix = Matrix4x4.identity;
+            
+        }
         else
         {
             Helper.DrawDebugArrow(transform.position, transform.position + transform.forward * 6, 1, Color.red);
