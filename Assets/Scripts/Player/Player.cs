@@ -55,6 +55,7 @@ public class Player : MonoBehaviour
         {
             Instance.StartCoroutine(Instance.Death(respawn));
 
+            AnalyticsManager.AddEntry(Instance.transform.position);
             Analytics.CustomEvent("playerDeath", new Dictionary<string, object>
             {
                 {"Position", (Vector2) Instance.transform.position},

@@ -6,6 +6,9 @@ public class LevelEndPoint : MonoBehaviour {
 
     void OnTriggerEnter()
     {
+        //Analytics Stuff
+        AnalyticsManager.SaveData();
+
         LevelManager.currentLevelManager.ClearLevel();
     }
 }

@@ -46,7 +46,7 @@ public class LevelManager : MonoBehaviour {
         {
             ProgressionManager.CurrentProfile.SetLevelUnlocked(levelToUnlock);
         }
-
+        
         Assert.HardAssert(levelsToUnlock.Length>0,"There should be at least one level to unlock");
         FindObjectOfType<LoadScene>().Load(levelsToUnlock[0]);
     }
