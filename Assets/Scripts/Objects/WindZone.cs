@@ -10,8 +10,10 @@ public class WindZone : MonoBehaviour {
     public float windForce;
     [Header("If Sphere collider")]
     public float radius = 2.0f;
+
     [Header("If box collider")]
-    public Vector3 size;
+    public float width;
+    public float height;
 
 #pragma warning disable 108,114
     private Collider collider;
@@ -33,7 +35,7 @@ public class WindZone : MonoBehaviour {
 	void Update ()
 	{
         if (collider is SphereCollider) (collider as SphereCollider).radius = radius;
-        else if (collider is BoxCollider) (collider as BoxCollider).size = size;
+        else if (collider is BoxCollider) (collider as BoxCollider).size = new Vector3(width, 2, height);
         else Assert.HardAssert(false, "Wind zone collider is not sphere or box collider ");
 	}
 

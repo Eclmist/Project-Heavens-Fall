@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Analytics;
@@ -7,21 +8,28 @@ public class Player : MonoBehaviour
 {
     public static Player Instance;
 
-    [Header("Debug")]
-    public bool debugKillPlayer;
+    [Header("Debug")] public bool debugKillPlayer;
     public bool debugSpawnPlayer;
 
-    [Header("Effects")]
-    public GameObject deathParticle;
+    [Header("Effects")] public GameObject deathParticle;
     public GameObject spawnParticle;
     private ParticleSystem[] wispParticle;
 
     private static Vector3 spawnPosition;
 
+    private ActionIntervalTimer analyticsReporterTimer;
+
     void Start () {
         spawnPosition = transform.position;
         wispParticle = GetComponentsInChildren<ParticleSystem>();
-        Instance = this; 
+        Instance = this;
+
+        analyticsReporterTimer = new ActionIntervalTimer(this, ReportPosition, 0.1f);
+    }
+
+    void ReportPosition()
+    {
+        AnalyticsManager.ReportLocation(transform.position);
     }
 
     void Update()
@@ -53,9 +61,12 @@ public class Player : MonoBehaviour
     {
         if (Instance != null)
         {
+            Instance.analyticsReporterTimer.running = false;
             Instance.StartCoroutine(Instance.Death(respawn));
 
-            AnalyticsManager.AddEntry(Instance.transform.position);
+            AnalyticsManager.AddDeathEntry(Instance.transform.position);
+            AnalyticsManager.ReportLocation(Instance.transform.position);
+            AnalyticsManager.TerminateLocation();
             Analytics.CustomEvent("playerDeath", new Dictionary<string, object>
             {
                 {"Position", (Vector2) Instance.transform.position},

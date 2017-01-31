@@ -20,7 +20,7 @@ public class AnalyticsManager : MonoBehaviour
         if (LoadLevelAnalyticsData)
         {
             LoadLevelAnalyticsData = false;
-            LoadData();
+            GetActiveData();
             if (activeData == null) Debug.LogWarning("<color=#FF0000>No data found to load</color>");
         }
     }
@@ -31,13 +31,23 @@ public class AnalyticsManager : MonoBehaviour
         {
             foreach (var activeDataDeathPoint in activeData.deathPoints)
             {
-                Gizmos.color = Color.black;
-                Gizmos.DrawSphere(activeDataDeathPoint, 1);
+                Gizmos.color = Color.red;
+                Gizmos.DrawSphere(activeDataDeathPoint, 0.3f);
+            }
+
+            foreach (var trail in activeData.locationTrails)
+            {
+                if (trail == null) continue;
+
+                for (int i = 1; i < trail.Count; i++)
+                {
+                    Debug.DrawLine(trail[i], trail[i-1]);
+                }
             }
         }
     }
 
-    public static void AddEntry(Vector3 deathPoint)
+    public static void AddDeathEntry(Vector3 deathPoint)
     {
         string currentLevel = SceneManager.GetActiveScene().name;
 
@@ -49,9 +59,34 @@ public class AnalyticsManager : MonoBehaviour
         activeData.deathPoints.Add(deathPoint);
     }
 
+    public static void ReportLocation(Vector3 position)
+    {
+        string currentLevel = SceneManager.GetActiveScene().name;
+        if (activeData == null || activeData.levelID != currentLevel)
+        {
+            GetActiveData();
+        }
+
+        if (activeData.activeLocationTrail == null)
+        {
+            activeData.activeLocationTrail = new List<Vector3>();
+        }
+
+        activeData.activeLocationTrail.Add(position);
+    }
+
+    public static void TerminateLocation()
+    {
+        activeData.locationTrails.Add(activeData.activeLocationTrail);
+        activeData.activeLocationTrail = null;
+    }
+
     public static void GetActiveData()
     {
         string currentLevel = SceneManager.GetActiveScene().name;
+
+        if (File.Exists(Application.persistentDataPath + "/ald/analyticsData.ald"))
+            LoadData();
 
         //If Active Data is null
         foreach (var levelDeathData in data)
@@ -59,6 +94,7 @@ public class AnalyticsManager : MonoBehaviour
             if (levelDeathData.levelID == currentLevel)
             {
                 activeData = levelDeathData;
+                return;
             }
         }
 
@@ -73,16 +109,16 @@ public class AnalyticsManager : MonoBehaviour
     {
         string currentLevel = SceneManager.GetActiveScene().name;
         print(currentLevel);
-        if (!File.Exists(Application.persistentDataPath + "/ald/analyticsData_" + currentLevel + ".ald")) return false;
+        if (!File.Exists(Application.persistentDataPath + "/ald/analyticsData.ald")) return false;
 
         FileStream file = new FileStream(
-            Application.persistentDataPath + "/ald/analyticsData_" + currentLevel + ".ald", FileMode.Open);
+            Application.persistentDataPath + "/ald/analyticsData.ald", FileMode.Open);
         try
         {
-            XmlSerializer serializer = new XmlSerializer(typeof(LevelDeathData));
+            XmlSerializer serializer = new XmlSerializer(typeof(List<LevelDeathData>));
             //BinaryFormatter bf = new BinaryFormatter();
 
-            activeData = (LevelDeathData)serializer.Deserialize(file);
+            data = (List<LevelDeathData>)serializer.Deserialize(file);
             //currentProfile.ReconstructDictionary();
             //print("Load"+currentProfile.names.Count + currentProfile.LevelsUnlocked);
             file.Close();
@@ -109,18 +145,19 @@ public class AnalyticsManager : MonoBehaviour
             return false;
         }
 
-        (new FileInfo(Application.persistentDataPath + "/ald/analyticsData_" + activeData.levelID + ".ald")).Directory
-            .Create();
+        var directoryInfo = (new FileInfo(Application.persistentDataPath + "/ald/analyticsData.ald")).Directory;
+        if (directoryInfo != null)
+            directoryInfo.Create();
 
         FileStream file = new FileStream(
-            Application.persistentDataPath + "/ald/analyticsData_" + activeData.levelID + ".ald", FileMode.OpenOrCreate);
+            Application.persistentDataPath + "/ald/analyticsData.ald", FileMode.OpenOrCreate);
         try
         {
-            XmlSerializer serializer = new XmlSerializer(typeof(LevelDeathData));
+            XmlSerializer serializer = new XmlSerializer(typeof(List<LevelDeathData>));
             //BinaryFormatter bf = new BinaryFormatter();
 
             //print("Save" + currentProfile.names.Count + currentProfile.LevelsUnlocked);
-            serializer.Serialize(file, activeData);
+            serializer.Serialize(file, data);
             file.Close();
             return true;
         }
@@ -143,4 +180,6 @@ public class LevelDeathData
 {
     [SerializeField] public string levelID;
     [SerializeField] public List<Vector3> deathPoints = new List<Vector3>();
+    [SerializeField] public List<List<Vector3>> locationTrails = new List<List<Vector3>>();
+    [NonSerialized,XmlIgnore] public List<Vector3> activeLocationTrail;
 }

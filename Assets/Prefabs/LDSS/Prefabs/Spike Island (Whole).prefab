@@ -596,6 +596,7 @@ GameObject:
   - component: {fileID: 4115260440083912}
   - component: {fileID: 114369838959506992}
   - component: {fileID: 114971384340544464}
+  - component: {fileID: 114187898822551402}
   m_Layer: 9
   m_Name: Spike Island (Whole)
   m_TagString: Untagged
@@ -1551,7 +1552,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1501582951896496}
   m_LocalRotation: {x: -0, y: -0.7008048, z: -0, w: 0.7133531}
-  m_LocalPosition: {x: 17.082512, y: 17.787, z: -32.643772}
+  m_LocalPosition: {x: 14.520462, y: 7.655411, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4764946520976606}
@@ -2264,7 +2265,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1618973661265182}
-  m_LocalRotation: {x: -0.6705651, y: 0.54528975, z: -0.4625431, w: 0.19762477}
+  m_LocalRotation: {x: -0.67056507, y: 0.5452897, z: -0.462543, w: 0.19762473}
   m_LocalPosition: {x: -0.27105594, y: -0.3046875, z: -0.98445904}
   m_LocalScale: {x: 1.4922334, y: 1.4922332, z: 1.4922328}
   m_Children:
@@ -5250,6 +5251,20 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: -0.15, y: 0.5, z: 1.94}
   m_Center: {x: -0.0000019271456, y: 0.0000024517478, z: -0.73299354}
+--- !u!114 &114187898822551402
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1501582951896496}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57e2b29fd1e06d14d8b2bdf3eb2d02c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  unlockObject: 0
+  setLockValue: 0
+  lockedValue: 0
 --- !u!114 &114369838959506992
 MonoBehaviour:
   m_ObjectHideFlags: 1
