@@ -122,4 +122,9 @@ public partial class Helper : MonoBehaviour
         Debug.DrawLine(from + right *width, from + right *width + dir / 2, color);
         Debug.DrawLine(from - right *width, from - right *width + dir / 2, color);
     }
+
+	public static string ColorString(Color color, string str)
+	{
+		return string.Format("<color=#{0}>{1}</color>",ColorUtility.ToHtmlStringRGB(color), str);
+	}
 }

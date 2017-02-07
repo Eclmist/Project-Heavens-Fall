@@ -22,7 +22,7 @@ public class PlayerControllerA : MonoBehaviour
     float sVelocity;
     Vector2 input;
 
-    bool jumpping = false;
+    public bool jumpping = false;
 
     float rayOffset = 0.1f;
     int horizontalRayCount = 6;
