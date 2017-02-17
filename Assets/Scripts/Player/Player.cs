@@ -67,6 +67,7 @@ public class Player : MonoBehaviour
             AnalyticsManager.AddDeathEntry(Instance.transform.position);
             AnalyticsManager.ReportLocation(Instance.transform.position);
             AnalyticsManager.TerminateLocation();
+	        AnalyticsManager.SaveData();
             Analytics.CustomEvent("playerDeath", new Dictionary<string, object>
             {
                 {"Position", (Vector2) Instance.transform.position},
