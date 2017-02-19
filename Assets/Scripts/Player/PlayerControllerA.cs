@@ -24,9 +24,9 @@ public class PlayerControllerA : MonoBehaviour
 
     public bool jumpping = false;
 
-    float rayOffset = 0.1f;
-    int horizontalRayCount = 6;
-    int verticalRayCount = 6;
+    float rayOffset = 0.15f;
+    int horizontalRayCount = 8;
+    int verticalRayCount = 8;
 
     public float maxClimbAngle = 60;
     public float maxDescendAngle = 80;
@@ -208,7 +208,7 @@ public class PlayerControllerA : MonoBehaviour
     void VerticalCollisions(ref Vector3 velocity)
     {
         float yDir = Mathf.Sign(velocity.y);
-        float rayLength = Mathf.Abs(velocity.y) + rayOffset + 0.05F;
+        float rayLength = Mathf.Abs(velocity.y) + rayOffset + 0.2F;
 
         for (int i = 0; i < verticalRayCount; i++)
         {

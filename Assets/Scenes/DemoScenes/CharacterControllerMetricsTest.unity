@@ -37,7 +37,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311992, g: 0.38074034, b: 0.35872713, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -410,7 +410,27 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1306255714249264, guid: 1bcf049937a0e604681fd962a619609b, type: 2}
       propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114890736815991844, guid: 1bcf049937a0e604681fd962a619609b,
+        type: 2}
+      propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114019741666608230, guid: 1bcf049937a0e604681fd962a619609b,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114011901436633506, guid: 1bcf049937a0e604681fd962a619609b,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114337724259382478, guid: 1bcf049937a0e604681fd962a619609b,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1bcf049937a0e604681fd962a619609b, type: 2}
@@ -802,11 +822,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &847484068 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1306255714249264, guid: 1bcf049937a0e604681fd962a619609b,
-    type: 2}
-  m_PrefabInternal: {fileID: 351153856}
 --- !u!1 &860741803
 GameObject:
   m_ObjectHideFlags: 0
@@ -1212,11 +1227,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1433037906 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1636326638965686, guid: 3162122a66903c74fbd0713ced1e0c3e,
-    type: 2}
-  m_PrefabInternal: {fileID: 1014620560}
 --- !u!1 &1516543736
 GameObject:
   m_ObjectHideFlags: 0
@@ -1401,14 +1411,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 845e8bd83609e3549af5a311ad811681, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lockedObjects: []
-  editModeVisibileObjects: []
-  editModeInvisibleObjects:
-  - {fileID: 847484068}
-  - {fileID: 1433037906}
-  wireframeHiddenObjects: []
-  gameObjectColorKeys: []
-  gameObjectColorValues: []
 --- !u!4 &1850804607
 Transform:
   m_ObjectHideFlags: 0
@@ -1520,6 +1522,10 @@ Prefab:
         type: 2}
       propertyPath: height
       value: 5.23
+      objectReference: {fileID: 0}
+    - target: {fileID: 1812123684665206, guid: d25f2f2b2a407d14fada7f4a65cc2d56, type: 2}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 135755826617313274, guid: d25f2f2b2a407d14fada7f4a65cc2d56, type: 2}
