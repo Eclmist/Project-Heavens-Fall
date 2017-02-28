@@ -123,6 +123,14 @@ public partial class Helper : MonoBehaviour
         Debug.DrawLine(from - right *width, from - right *width + dir / 2, color);
     }
 
+	public static void GizmosDrawBallLine(Vector3 from, Vector3 to, float radius, Color color)
+	{
+		Gizmos.color = color;
+		Gizmos.DrawSphere(from, radius);
+		Gizmos.DrawSphere(to, radius);
+		Gizmos.DrawLine(from, to);
+	}
+
 	public static string ColorString(Color color, string str)
 	{
 		return string.Format("<color=#{0}>{1}</color>",ColorUtility.ToHtmlStringRGB(color), str);
