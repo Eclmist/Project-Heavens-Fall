@@ -55,11 +55,11 @@ GameObject:
   m_Component:
   - component: {fileID: 4425819069399902}
   - component: {fileID: 114269877096620150}
-  - component: {fileID: 136383462304834768}
   - component: {fileID: 114281896139635120}
   - component: {fileID: 114023316351943528}
-  - component: {fileID: 54717272323848886}
-  - component: {fileID: 114649627638179694}
+  - component: {fileID: 54584785476430718}
+  - component: {fileID: 65008754714528354}
+  - component: {fileID: 114970815607733106}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -166,7 +166,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1636326638965686}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.14, y: 6.26, z: 0}
+  m_LocalPosition: {x: -99.18, y: 2.78, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4127000484506032}
@@ -241,7 +241,7 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1816042318146250}
   m_Mesh: {fileID: 0}
---- !u!54 &54717272323848886
+--- !u!54 &54584785476430718
 Rigidbody:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -256,6 +256,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!65 &65008754714528354
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1636326638965686}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1.5669811, z: 1}
+  m_Center: {x: 0, y: -0.28349137, z: 0}
 --- !u!96 &96529526118347962
 TrailRenderer:
   serializedVersion: 2
@@ -434,16 +446,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5568c2675076b8e46b5417de9d4074f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxJump: 6
-  timeToReachMaxJump: 0.7
-  timeToReachMaxSpeed: 0.15
-  maxSpeed: 10
+  horizontalRayCount: 8
+  verticalRayCount: 8
+  hRaySpread: 0
+  vRaySpread: 0
   collidedLayer:
     serializedVersion: 2
     m_Bits: 512
+  maxJump: 6
+  timeToReachMaxJump: 0.7
   flipObject: {fileID: 1275938081291378}
-  maxClimbAngle: 50
-  maxDescendAngle: 50
+  jumping: 0
 --- !u!114 &114281896139635120
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -458,7 +471,7 @@ MonoBehaviour:
   hitWhatDie:
     serializedVersion: 2
     m_Bits: 1024
---- !u!114 &114649627638179694
+--- !u!114 &114970815607733106
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -470,23 +483,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
+  useCustomKeycodes: 0
   left: 97
   right: 100
   up: 119
   down: 115
---- !u!136 &136383462304834768
-CapsuleCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1636326638965686}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.71
-  m_Height: 0
-  m_Direction: 1
-  m_Center: {x: 0, y: -0.33, z: 0}
 --- !u!198 &198114776834897274
 ParticleSystem:
   m_ObjectHideFlags: 1

@@ -294,7 +294,7 @@ public class CharacterControllerUnitTest : MonoBehaviour
 
 					if (timeElapsed > 2 && !testComponentExecutionCheck)
 					{
-						Player.Instance.GetComponent<PlayerControllerA>().jumpping = true;
+						Player.Instance.GetComponent<PlayerControllerA>().jumping = true;
 						testComponentExecutionCheck = true;
 					}
 
