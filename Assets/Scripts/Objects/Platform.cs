@@ -6,7 +6,7 @@ public class Platform : RaycastHelper
 {
 
     public LayerMask passengerMask;
-    public bool enablePassengerMovement = false;
+    public bool enablePassengerMovement = true;
     public Vector3 oscillationDirection;
     public float oscillationTime;
     float t = 0;
@@ -161,6 +161,11 @@ public class Platform : RaycastHelper
             standingOnPlatform = _standingOnPlatform;
             moveBeforePlatform = _moveBeforePlatform;
         }
+    }
+
+    void OnDrawGizmos()
+    {
+        Helper.GizmosDrawBallLine(transform.position, transform.position + oscillationDirection, 0.5f, Color.yellow);
     }
 
 }

@@ -1829,6 +1829,7 @@ MonoBehaviour:
   passengerMask:
     serializedVersion: 2
     m_Bits: 256
+  enablePassengerMovement: 1
   oscillationDirection: {x: 0, y: 6.05, z: 0}
   oscillationTime: 2
 --- !u!114 &717987066
@@ -3987,6 +3988,7 @@ MonoBehaviour:
   passengerMask:
     serializedVersion: 2
     m_Bits: 256
+  enablePassengerMovement: 1
   oscillationDirection: {x: 0, y: 6.05, z: 0}
   oscillationTime: 1
 --- !u!114 &1600704502
