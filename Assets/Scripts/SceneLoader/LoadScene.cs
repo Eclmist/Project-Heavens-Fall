@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class LoadScene : MonoBehaviour
 {
+	public static LoadScene Instance;
 
     private AsyncOperation ao;
     private bool coroutineStarted = false;
@@ -13,7 +14,13 @@ public class LoadScene : MonoBehaviour
     void Awake()
     {
         DontDestroyOnLoad(gameObject);
-    }
+
+	    if (Instance != null)
+		    Destroy(this);
+		else
+			Instance = this;
+
+	}
 
     //TODO: Samuel: Make some overloads for this function
     public void Load(int index)
