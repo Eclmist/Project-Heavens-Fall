@@ -126,8 +126,8 @@ public partial class Helper : MonoBehaviour
 	public static void GizmosDrawBallLine(Vector3 from, Vector3 to, float radius, Color color)
 	{
 		Gizmos.color = color;
-		Gizmos.DrawSphere(from, radius);
-		Gizmos.DrawSphere(to, radius);
+		Gizmos.DrawWireSphere(from, radius);
+		Gizmos.DrawWireSphere(to, radius);
 		Gizmos.DrawLine(from, to);
 	}
 
